@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AssignmentOne": {
+    "WeekSix": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/AssignmentOne",
+            "outputPath": "dist/WeekSix",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "AssignmentOne:build"
+            "browserTarget": "WeekSix:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "AssignmentOne:build:production"
+              "browserTarget": "WeekSix:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AssignmentOne:build"
+            "browserTarget": "WeekSix:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "AssignmentOne-e2e": {
+    "WeekSix-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "AssignmentOne:serve"
+            "devServerTarget": "WeekSix:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "AssignmentOne:serve:production"
+              "devServerTarget": "WeekSix:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "AssignmentOne"
+  "defaultProject": "WeekSix"
 }

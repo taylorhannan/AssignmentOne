@@ -1,0 +1,15 @@
+<h1>chat</h1>
+<p><a href="./home">Home</a></p>
+<ng-container *ngFor="let message of messages">
+  <div class="message">
+    {{message.text}}
+
+  </div>
+</ng-container>
+
+<div>
+  <input [(ngModel)]="message" type="text" #newMessage>
+  <div>
+    <button type="button" (click)="sendMessage()">Send</button>
+  </div>
+</div>
