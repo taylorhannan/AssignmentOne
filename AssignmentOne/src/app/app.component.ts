@@ -7,7 +7,7 @@ import { SocketService } from './socket.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'WeekSix';
+  title = 'Assignment One';
   constructor(socketService: SocketService) { }
 /* If there is
 “Uncaught ReferenceError: global is not defined”

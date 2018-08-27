@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http';
 import { SocketService } from './socket.service';
 import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
+import { NavComponent } from './nav/nav.component';
 // for created service
 
 
@@ -18,7 +19,8 @@ import { ChatComponent } from './chat/chat.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    ChatComponent
+    ChatComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,4 @@
-<h1>chat</h1>
-<p><a href="./home">Home</a></p>
+<h2>Chat</h2>
 <ng-container *ngFor="let message of messages">
   <div class="message">
     {{message.text}}
@@ -8,7 +7,7 @@
 </ng-container>
 
 <div>
-  <input [(ngModel)]="message" type="text" #newMessage>
+  <input [(ngModel)]="message" placeholder="Type message here.." type="text" #newMessage>
   <div>
     <button type="button" (click)="sendMessage()">Send</button>
   </div>

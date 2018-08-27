@@ -1,6 +1,12 @@
-<h1>home</h1>
-Enter your name
+<div *ngIf="!isLoggedOut; else loggedIn">
+<h2>Login</h2>
+<br>
 <form (submit)="onSignin()">
-<input type="email" placeholder="username" [(ngModel)]='username' name="username" id="username">
+<input type="email" placeholder="Username" [(ngModel)]='username' name="username" id="username">
 <button type="submit">Login</button>
 </form>
+</div>
+
+<ng-template #loggedIn>
+  <p>Welcome ((user))!</p>
+</ng-template>

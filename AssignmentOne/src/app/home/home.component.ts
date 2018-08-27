@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
 public onSignin(): void {
-  //event.preventDefault();
+  event.preventDefault();
   if (typeof(Storage) !== "undefined"){
     localStorage.setItem("username", this.username);
     console.log(localStorage);
