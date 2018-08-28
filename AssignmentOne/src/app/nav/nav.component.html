@@ -4,11 +4,11 @@
   <a href="./chat">Chat</a>
   <a href="https://github.com/taylorhannan/AssignmentOne">Github</a>
 
-  <div *ngIf="!isLoggedIn; else loggedOut" id="logout">
+  <div *ngIf="loggedIn; else loggedOut" id="logout">
     <button type="button" (click)="logout()">Logout</button>
   </div>
   <ng-template #loggedOut>
-    <p>you are logged in!</p>
+    <p>login here</p>
   </ng-template>
 
 </div>

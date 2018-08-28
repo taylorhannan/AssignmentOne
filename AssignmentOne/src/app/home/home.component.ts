@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   username:string = '';
+  loggedOut:boolean;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
