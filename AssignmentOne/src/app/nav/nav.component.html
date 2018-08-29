@@ -3,12 +3,15 @@
   <a href="./home">Home</a>
   <a href="./chat">Chat</a>
   <a href="https://github.com/taylorhannan/AssignmentOne">Github</a>
+  <a href="./admin">Admin</a>
 
-  <div *ngIf="loggedIn; else loggedOut" id="logout">
+  <!-- <div *ngIf="loggedIn; else loggedOut" id="logout"> -->
+  <div id="logout">
     <button type="button" (click)="logout()">Logout</button>
-  </div>
+ </div>
+ <!--
   <ng-template #loggedOut>
     <p>login here</p>
   </ng-template>
-
+-->
 </div>

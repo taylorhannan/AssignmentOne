@@ -21,18 +21,18 @@ connection;
       this.message="";
     });
 
-    /*if (localStorage.username === ""){
-      alert("Invalid Username!")
+    if (!localStorage.username){
+      alert("You are not logged in!")
       this.router.navigateByUrl('');
-    }*/
+    }
   }
 
 sendMessage(){
   let date = new Date();
   let username = JSON.stringify(localStorage.username);
-  //let usernamestr = username.replace(/\"/g, ""));
+  let usernamestr = username.replace(/\"/g, ""));
 
-  this.socketService.sendMessage(this.message + ' (' + username + ') - Sent at '  + date.getHours() + ':' + date.getMinutes());
+  this.socketService.sendMessage(this.message + ' (' + usernamestr + ') - Sent at '  + date.getHours() + ':' + date.getMinutes());
   this.message="";
 }
 }

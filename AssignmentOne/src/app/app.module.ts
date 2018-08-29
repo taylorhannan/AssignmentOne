@@ -12,6 +12,7 @@ import { SocketService } from './socket.service';
 import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
 import { NavComponent } from './nav/nav.component';
+import { AdminComponent } from './admin/admin.component';
 // for created service
 
 
@@ -20,7 +21,8 @@ import { NavComponent } from './nav/nav.component';
     AppComponent,
     HomeComponent,
     ChatComponent,
-    NavComponent
+    NavComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

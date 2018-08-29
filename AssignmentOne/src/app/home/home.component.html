@@ -1,17 +1,12 @@
-<div *ngIf="loggedOut; else loggedIn">
+<div>
 <h2>Login</h2>
-<br>
-logged out: {{loggedOut}}
-
 <br>
 
 <form (submit)="onSignin(); loggedOut = false">
 <input type="email" placeholder="Username" [(ngModel)]='username' name="username" id="username">
+<br>
+<input type="email" placeholder="Email" [(ngModel)]='email' name="email" id="email">
+<br>
 <button type="submit">Login</button>
 </form>
 </div>
-
-<ng-template #loggedIn>
-  <p>Welcome {{username}}!</p>
-  logged out: {{loggedOut}}
-</ng-template>
