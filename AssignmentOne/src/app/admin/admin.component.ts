@@ -16,18 +16,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
 
-    /*interface UserData {
-      login: string;
-      bio: string;
-      company: string;
-    }
-    this.http.get<UserData>('https://api.github.com/users/seeschweiler').subscribe(data => {
-      console.log("User Login: " + data.login);
-      console.log("Bio: " + data.bio);
-      console.log("Company: " + data.company);
-    });*/
-
-
     console.log(localStorage);
 
     if (!localStorage.username || !localStorage.email){
@@ -47,7 +35,9 @@ export class AdminComponent implements OnInit {
     document.getElementById("demo").innerHTML = obj.name + ", " + obj.birth;*/
   }
 
+
   public createUser() {
+    // Function used to create user & post to backend API
     event.preventDefault();
     if (this.username === "" || this.email === "" || this.role === ""){
       alert("All fields must not be blank!");

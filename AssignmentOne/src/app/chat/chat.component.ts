@@ -28,6 +28,7 @@ connection;
   }
 
 sendMessage(){
+  // Pushes message to socketService & logs datetime + user who sent the message.
   let date = new Date();
   let username = JSON.stringify(localStorage.username);
   let usernamestr = username.replace(/\"/g, ""));

@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
 public onSignin(): void {
+  // Logs user to LocalStorage, ensures all fields are error-free & routes to /chat.
   event.preventDefault();
   if (typeof(Storage) !== "undefined"){
     localStorage.setItem("username", this.username);
