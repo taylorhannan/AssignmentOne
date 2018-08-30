@@ -52,7 +52,7 @@ export class AdminComponent implements OnInit {
     if (this.username === "" || this.email === "" || this.role === ""){
       alert("All fields must not be blank!");
     }else{
-      const req = this.http.post('http://jsonplaceholder.typicode.com/posts', {
+      const req = this.http.post('http://localhost:3000/api/reg?', {
             username: this.username,
             email: this.email,
             role: this.role

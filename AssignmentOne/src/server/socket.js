@@ -1,5 +1,5 @@
 module.exports = function(app, io) {
-  console.log("server socket initiaited");
+  console.log("server socket initiated");
 
   io.on('connection', (socket) => {
     console.log('user connection');
