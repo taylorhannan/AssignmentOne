@@ -1,33 +1,43 @@
-<h2>Admin Dashboard</h2>
-<h4>Create User</h4>
-<div id="createuserform">
-  <form (submit)="createUser();">
-    Username <input name="username" placeholder="Username.." [(ngModel)]='username'>
-    <br>
-    Email <input name="email" placeholder="Email.." [(ngModel)]='email'>
-    <br>
-    Role <select [(ngModel)]="role" name="role">
-      <option value="user">User</option>
-      <option value="groupAdmin">Group Admin</option>
-      <option value="superAdmin">Super Admin</option>
-    </select>
-    <br><br>
-    <button type="submit">Create</button>
-  </form>
-</div>
-
-<p id="demo"></p>
-
 <br>
-<h4>Delete User</h4>
-<form action="/">
-  <select name="users">
-    <!--ng forloop goes here-->
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="fiat" selected>Fiat</option>
-    <option value="audi">Audi</option>
-  </select>
-  <br><br>
-  <button type="submit">Delete</button>
-</form>
+<div id="admin">
+  <h2>Admin Dashboard</h2>
+  <div id="createUser">
+  <h3>Create User</h3>
+    <div id="createuserform">
+      <form (submit)="createUser();">
+        <p>Username</p>
+        <input name="username" placeholder="Username.." [(ngModel)]='username'>
+        <br>
+        <p>Email</p>
+        <input name="email" placeholder="Email.." [(ngModel)]='email'>
+        <br>
+        <p>Role</p>
+        <select [(ngModel)]="role" name="role">
+          <option value="user">User</option>
+          <option value="groupAdmin">Group Admin</option>
+          <option value="superAdmin">Super Admin</option>
+        </select>
+        <br><br>
+        <button type="submit">Create</button>
+      </form>
+    </div>
+  </div>
+
+  <p id="demo"></p>
+
+  <br>
+  <div id="deleteUser">
+    <h3>Delete User</h3>
+    <form action="/">
+      <select name="users">
+        <!--ng forloop goes here-->
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="fiat" selected>Fiat</option>
+        <option value="audi">Audi</option>
+      </select>
+      <br><br>
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+</div>

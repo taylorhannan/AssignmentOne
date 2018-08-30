@@ -1,0 +1,19 @@
+#admin {
+  background-color: #42617f;
+  display: inline-block;
+  padding-top: 0px;
+  padding: 5px;
+  width:45%;
+}
+
+#createUser {
+  background-color: #5883ad;
+  display: inline-block;
+  padding: 10px;
+}
+
+#deleteUser {
+  background-color: #5883ad;
+  display: inline-block;
+  padding: 10px;
+}

@@ -41,9 +41,11 @@ app.get('/api/auth', (req, res) => {
   }});
 });
 
+
+
+
 //Route to manage user registration
 app.get('/api/reg', (req, res) => {
-
   var isUser = 0;
   var userObj;
   //localhost:3000/api/reg?username=abcdefg

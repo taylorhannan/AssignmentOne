@@ -1,12 +1,13 @@
 <div>
-<h2>Login</h2>
-<br>
-
-<form (submit)="onSignin(); loggedOut = false">
-<input type="email" placeholder="Username" [(ngModel)]='username' name="username" id="username">
-<br>
-<input type="email" placeholder="Email" [(ngModel)]='email' name="email" id="email">
-<br>
-<button type="submit">Login</button>
-</form>
+  <div id="login">
+  <h2>Login</h2>
+  <br>
+  <form (submit)="onSignin(); loggedOut = false">
+  <input type="email" placeholder="Username" [(ngModel)]='username' name="username" id="username">
+  <br>
+  <input type="email" placeholder="Email" [(ngModel)]='email' name="email" id="email">
+  <br>
+  <button type="submit">Login</button>
+  </form>
+  </div>
 </div>
