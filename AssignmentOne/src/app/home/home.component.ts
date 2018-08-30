@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-
     console.log(localStorage);
     if (localStorage.getItem("username") != null){
       alert("You are already logged in!")
@@ -27,6 +26,7 @@ public onSignin(): void {
   if (typeof(Storage) !== "undefined"){
     localStorage.setItem("username", this.username);
     localStorage.setItem("email", this.email);
+    localStorage.setItem("role", "superAdmin")
     console.log(localStorage);
   }else{
     console.log('Local Storage Undefined');

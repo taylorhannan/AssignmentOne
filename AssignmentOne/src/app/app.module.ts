@@ -14,7 +14,8 @@ import { ChatComponent } from './chat/chat.component';
 import { NavComponent } from './nav/nav.component';
 import { AdminComponent } from './admin/admin.component';
 // for created service
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { AdminComponent } from './admin/admin.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [SocketService],
   bootstrap: [AppComponent]

@@ -21,7 +21,7 @@ connection;
       this.message="";
     });
 
-    if (!localStorage.username){
+    if (!localStorage.username || !localStorage.email){
       alert("You are not logged in!")
       this.router.navigateByUrl('');
     }
@@ -31,8 +31,11 @@ sendMessage(){
   let date = new Date();
   let username = JSON.stringify(localStorage.username);
   let usernamestr = username.replace(/\"/g, ""));
-
-  this.socketService.sendMessage(this.message + ' (' + usernamestr + ') - Sent at '  + date.getHours() + ':' + date.getMinutes());
-  this.message="";
+  if(this.message == null || this.message === ""){
+    alert('You must enter a message to send something!');
+  }else{
+    this.socketService.sendMessage(this.message + ' (' + usernamestr + ') - Sent at '  + date.getHours() + ':' + date.getMinutes());
+    this.message="";
+  }
 }
 }
