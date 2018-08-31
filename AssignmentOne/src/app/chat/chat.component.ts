@@ -31,11 +31,11 @@ sendMessage(){
   // Pushes message to socketService & logs datetime + user who sent the message.
   let date = new Date();
   let username = JSON.stringify(localStorage.username);
-  let usernamestr = username.replace(/\"/g, ""));
+  //let usernamestr = username.replace(/\"/g, ""));
   if(this.message == null || this.message === ""){
     alert('You must enter a message to send something!');
   }else{
-    this.socketService.sendMessage(this.message + ' (' + usernamestr + ') - Sent at '  + date.getHours() + ':' + date.getMinutes());
+    this.socketService.sendMessage(this.message + ' (' + username + ') - Sent at '  + date.getHours() + ':' + date.getMinutes());
     this.message="";
   }
 }

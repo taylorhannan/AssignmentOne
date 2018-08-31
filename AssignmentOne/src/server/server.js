@@ -22,7 +22,7 @@ app.get('/api/auth', (req, res) => {
   var uname = req.query.username;
   var userObj;
 
-  fs.readFile('authdata.json', 'utf8', function(err, data){
+  fs.readFile('userdata.json', 'utf8', function(err, data){
       if (err) {
           console.log(err);
           //Some error happended opening the file. No Success
@@ -45,13 +45,13 @@ app.get('/api/auth', (req, res) => {
 
 
 //Route to manage user registration
-app.get('/api/reg', (req, res) => {
+app.post('/api/reg', (req, res) => {
   var isUser = 0;
   var userObj;
   //localhost:3000/api/reg?username=abcdefg
   var uname = req.query.username;
 
-  fs.readFile('authdata.json','utf-8', function(err, data){
+  fs.readFile('userdata.json','utf-8', function(err, data){
       if (err){
           console.log(err);
       } else {
@@ -70,7 +70,7 @@ app.get('/api/reg', (req, res) => {
          userObj.push({'name':uname})
          //Prepare data for writing (convert to a string)
          var newdata = JSON.stringify(userObj);
-         fs.writeFile('authdata.json',newdata,'utf-8',function(err){
+         fs.writeFile('userdata.json',newdata,'utf-8',function(err){
            if (err) throw err;
            //Send response that registration was successfull.
            res.send({'username':uname,'success':true});
