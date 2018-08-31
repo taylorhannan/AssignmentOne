@@ -22,6 +22,7 @@ connection;
     });
 
     if (!localStorage.username || !localStorage.email){
+      localStorage.clear();
       alert("You are not logged in!")
       this.router.navigateByUrl('');
     }

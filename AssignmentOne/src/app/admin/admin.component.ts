@@ -42,7 +42,8 @@ export class AdminComponent implements OnInit {
     if (this.username === "" || this.email === "" || this.role === ""){
       alert("All fields must not be blank!");
     }else{
-      const req = this.http.post('http://localhost:3000/api/reg', {
+      var test1 =  {'mes': 'hey dude', 'yo': ['im here', 'and here']};
+      const req = this.http.post('http://localhost:3000/api/auth', {
             username: this.username
             //email: this.email,
             //role: this.role

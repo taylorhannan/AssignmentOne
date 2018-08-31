@@ -6,7 +6,9 @@ let socketIO = require('socket.io');
 let io = socketIO(server);
 let fs = require('fs');
 var cors = require('cors');
+var bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
 app.use(cors());
 const port = process.env.PORT || 3000;
 
@@ -17,10 +19,14 @@ server.listen(3000, () => {
 });
 
 //Route to manage user logins
-app.get('/api/auth', (req, res) => {
+app.post('/api/auth', (req, res) => {
 // localhost:3000/api/auth?usename=Terry
-  var uname = req.query.username;
+  var uname = req.body.username;
+  var uemail = req.body.email;
+  var urole;
   var userObj;
+  console.log(uname);
+  console.log(uemail);
 
   fs.readFile('userdata.json', 'utf8', function(err, data){
       if (err) {
@@ -32,8 +38,14 @@ app.get('/api/auth', (req, res) => {
       for (let i=0;i<userObj.length;i++){
         if (userObj[i].name == uname){
           //find first instance of user name and success
-          res.send({'username':uname,'success':true});
-          return;
+          for (let k=0;k<userObj.length;k++){
+            if (userObj[k].email == uemail){
+              urole = userObj[k].role;
+              res.send({'username':uname,'email':uemail,'role':urole,'success':true});
+              console.log(urole);
+              return;
+            }
+          }
         }
       }
       //no username was found that matched
@@ -64,6 +76,7 @@ app.post('/api/reg', (req, res) => {
       }
       if (isUser > 0){
         //Name already exists in the file
+        console.log(req.body);
          res.send({'username':'','success':false});
        }else{
          //Add name to list of names
@@ -78,4 +91,8 @@ app.post('/api/reg', (req, res) => {
        }
      }
   })
+})
+
+//Route to delete user
+app.post('/api/del', (req, res) => {
 })
