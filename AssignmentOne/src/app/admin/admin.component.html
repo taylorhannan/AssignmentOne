@@ -27,15 +27,14 @@
   <br>
   <div id="deleteUser">
     <h3>Delete User</h3>
-    <form (submit)="deleteUser();">
-      <!--ng forloop goes here-->
-      <select name="users">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="fiat" selected>Fiat</option>
-        <option value="audi">Audi</option>
-      </select>
-      <br><br>
+
+    <form (submit)="deleteUser(deletedUser);">
+        <select placeholder="Delete User" [(ngModel)]="deletedUser" name="deluser">
+          <option *ngFor="let user of users" [value]="user.name">
+            {{user.name}}
+          </option>
+        </select>
+      <p> Selected User to Delete: {{deletedUser}}</p>
       <button type="submit">Delete</button>
     </form>
   </div>

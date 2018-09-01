@@ -95,7 +95,7 @@ app.post('/api/reg', (req, res) => {
           });
        }
      }
-  })
+  });
 });
 
 
@@ -106,32 +106,39 @@ app.post('/api/del', (req, res) => {
   var delUserObj;
   //localhost:3000/api/reg?username=abcdefg
   var delUname = req.body.username;
-  var delUemail = req.body.email;
-  var delUrole = req.body.role;
-  console.log(delUname);
 
   fs.readFile('userdata.json','utf-8', function(err, data){
     if (err){
         console.log(err);
     }else{
-      for (let i=0;i<delUserObj.length;i++){
-        if (delUserObj[i].name == delUname || delUserObj[i].email == delUemail){
-          //Check for duplicates
-          isUser = 1;
+      delUserObj = JSON.parse(data);
+      console.log("deluserobj", delUserObj);
+      var newdeldata = JSON.stringify(delUserObj);
+      for (let j=0;j<delUserObj.length;j++){
+        if (delUserObj[j].name == delUname){
+          //Check for match
+          delUserObj.splice(j,1);
         }
       }
-      if (isUser > 0){
-        // if name already exists in file
-        delUserObj.splice(1,{'name':delUname,'email':delUemail,'role':delUrole})
-        var newdeldata = JSON.stringify(delUserObj);
-        fs.writeFile('userdata.json',newdeldata,'utf-8',function(err){
-          if (err) throw err;
-          //Send response that registration was successfull.
-          res.send({'username':delUname,'email':delUemail,'role':delUrole,'success':true});
-        });
-      }else{
-        res.send({'success':false});
-      }
+      fs.writeFile('userdata.json',newdeldata,'utf-8',function(err){
+        if (err) throw err;
+        //Send response that deletion was successfull.
+        res.send({'success':true});
+      });
+    }
+  });
+});
+
+
+//Route to get user JSON
+app.post('/api/users', (req, res) => {
+  fs.readFile('userdata.json','utf-8', function(err, data){
+    if (err){
+        console.log(err);
+    }else{
+      var userData = JSON.parse(data);
+      var userDataString = JSON.stringify(userData);
+      res.send({userData});
     }
   });
 });

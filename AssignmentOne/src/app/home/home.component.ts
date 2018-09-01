@@ -16,15 +16,15 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
-    console.log(localStorage);
-    if (localStorage.getItem("username") != null){
+    console.log(sessionStorage);
+    if (sessionStorage.getItem("username") != null){
       alert("You are already logged in!")
       this.router.navigateByUrl('/chat');
     }
   }
 
 public onSignin(): void {
-  // Logs user to LocalStorage, ensures all fields are error-free & routes to /chat.
+  // Logs user to sessionStorage, ensures all fields are error-free & routes to /chat.
   event.preventDefault();
   if (this.username === "" && this.email === ""){
     alert("You must enter an email and a username!");
@@ -36,10 +36,11 @@ public onSignin(): void {
         })
         .subscribe((data: any) => {
             if (data.success) {
+                alert("Login Successful!");
                 this.router.navigateByUrl('/chat');
-                localStorage.setItem("username", data.username);
-                localStorage.setItem("email", data.email);
-                localStorage.setItem("role", data.role);
+                sessionStorage.setItem("username", data.username);
+                sessionStorage.setItem("email", data.email);
+                sessionStorage.setItem("role", data.role);
             } else {
               alert('Username/Email incorrect!')
             }

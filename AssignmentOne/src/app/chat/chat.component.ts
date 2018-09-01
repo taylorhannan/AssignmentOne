@@ -21,8 +21,8 @@ connection;
       this.message="";
     });
 
-    if (!localStorage.username || !localStorage.email){
-      localStorage.clear();
+    if (!sessionStorage.username || !sessionStorage.email){
+      sessionStorage.clear();
       alert("You are not logged in!")
       this.router.navigateByUrl('');
     }
@@ -31,7 +31,7 @@ connection;
 sendMessage(){
   // Pushes message to socketService & logs datetime + user who sent the message.
   let date = new Date();
-  let username = JSON.stringify(localStorage.username);
+  let username = JSON.stringify(sessionStorage.username);
   //let usernamestr = username.replace(/\"/g, ""));
   if(this.message == null || this.message === ""){
     alert('You must enter a message to send something!');

@@ -15,11 +15,11 @@ export class NavComponent implements OnInit {
 
   logout(){
     event.preventDefault();
-    if (!localStorage.username || !localStorage.email){
+    if (!sessionStorage.username || !sessionStorage.email){
       alert('You are already logged out!');
     }else{
-      localStorage.clear();
-      console.log(localStorage);
+      sessionStorage.clear();
+      console.log(sessionStorage);
       alert('You are now logged out!');
       this.router.navigateByUrl('');
     }
