@@ -59,40 +59,79 @@ app.post('/api/auth', (req, res) => {
 //Route to manage user registration
 app.post('/api/reg', (req, res) => {
   var isUser = 0;
-  var userObj;
+  var regUserObj;
   //localhost:3000/api/reg?username=abcdefg
-  var uname = req.query.username;
+  var regUname = req.body.username;
+  var regUemail = req.body.email;
+  var regUrole = req.body.role;
+  console.log(regUname)
 
   fs.readFile('userdata.json','utf-8', function(err, data){
       if (err){
           console.log(err);
       } else {
-      userObj = JSON.parse(data);
-      for (let i=0;i<userObj.length;i++){
-        if (userObj[i].name == uname){
+      regUserObj = JSON.parse(data);
+
+      for (let i=0;i<regUserObj.length;i++){
+        if (regUserObj[i].name == regUname || regUserObj[i].email == regUemail){
           //Check for duplicates
           isUser = 1;
         }
       }
+
       if (isUser > 0){
         //Name already exists in the file
         console.log(req.body);
          res.send({'username':'','success':false});
        }else{
          //Add name to list of names
-         userObj.push({'name':uname})
+         regUserObj.push({'name':regUname,'email':regUemail,'role':regUrole})
          //Prepare data for writing (convert to a string)
-         var newdata = JSON.stringify(userObj);
+         var newdata = JSON.stringify(regUserObj);
          fs.writeFile('userdata.json',newdata,'utf-8',function(err){
            if (err) throw err;
            //Send response that registration was successfull.
-           res.send({'username':uname,'success':true});
+           res.send({'username':regUname,'email':regUemail,'role':regUrole,'success':true});
           });
        }
      }
   })
-})
+});
+
+
 
 //Route to delete user
 app.post('/api/del', (req, res) => {
-})
+  var userExists = 0;
+  var delUserObj;
+  //localhost:3000/api/reg?username=abcdefg
+  var delUname = req.body.username;
+  var delUemail = req.body.email;
+  var delUrole = req.body.role;
+  console.log(delUname);
+
+  fs.readFile('userdata.json','utf-8', function(err, data){
+    if (err){
+        console.log(err);
+    }else{
+      for (let i=0;i<delUserObj.length;i++){
+        if (delUserObj[i].name == delUname || delUserObj[i].email == delUemail){
+          //Check for duplicates
+          isUser = 1;
+        }
+      }
+      if (isUser > 0){
+        // if name already exists in file
+        delUserObj.splice(1,{'name':delUname,'email':delUemail,'role':delUrole})
+        var newdeldata = JSON.stringify(delUserObj);
+        fs.writeFile('userdata.json',newdeldata,'utf-8',function(err){
+          if (err) throw err;
+          //Send response that registration was successfull.
+          res.send({'username':delUname,'email':delUemail,'role':delUrole,'success':true});
+        });
+      }else{
+        res.send({'success':false});
+      }
+    }
+  });
+});

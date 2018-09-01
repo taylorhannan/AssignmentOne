@@ -34,30 +34,25 @@ public onSignin(): void {
           username: this.username,
           email: this.email,
         })
-          .subscribe(
-            res => {
-              if(res.success == true){
-                console.log(res.success);
-                alert('User logged in successfully!');
-                localStorage.setItem("username", res.username);
-                localStorage.setItem("email", res.email);
-                localStorage.setItem("role", res.role)
-                console.log(localStorage);
+        .subscribe((data: any) => {
+            if (data.success) {
                 this.router.navigateByUrl('/chat');
-              }else{
-                alert('Username or email incorrect!');
-              }
-            },
-            err => {
-              alert('An error has occured trying to create user.')
-              console.log("Error occured");
-              return;
+                localStorage.setItem("username", data.username);
+                localStorage.setItem("email", data.email);
+                localStorage.setItem("role", data.role);
+            } else {
+              alert('Username/Email incorrect!')
             }
-          );
+          },
+          err => {
+            alert('An error has occured trying to create user.')
+            console.log("Error occured");
+            return;
+          });
   }else{
     console.log('Local Storage Undefined');
     alert("Error: Local Storage Undefined!")
     return;
   }
-  }
+}
 }
