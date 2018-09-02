@@ -16,9 +16,10 @@ export class AdminComponent implements OnInit {
   email:string = '';
   role:string = '';
   deletedUser: string;
-  users:AdminComponent[] = [{"name":"super","email":"super@admin.com","role":"superAdmin"},{"name":"deluser1","email":"deluser@foobar.com","role":"user"},{"name":"deluser2","email":"deluser2@foobar.com","role":"user"},{"name":"deluser3","email":"deluser3@foobar.com","role":"user"}];
+  users = [{}];
 
   ngOnInit(): void {
+
     if (!sessionStorage.username || !sessionStorage.email){
       alert("You are not logged in!")
       this.router.navigateByUrl('');
@@ -29,10 +30,10 @@ export class AdminComponent implements OnInit {
 
     const req = this.http.post('http://localhost:3000/api/users', {
       })
-        .subscribe(data => {
-            if (data) {
-              console.log('data', data);
-              //data.push(this.users);
+        .subscribe((data: any) => {
+            if (data.userData) {
+              console.log('data', data.userData);
+              this.users = data.userData;
               console.log('thisusers',this.users);
             } else {
               alert('Error!');
@@ -90,13 +91,13 @@ export class AdminComponent implements OnInit {
               if (data.success) {
                 alert('User deleted successfully!');
               } else {
-                alert('Error!');
+                alert('This user does not exist!');
                 return;
               }
             },
             err => {
-              alert('An error has occured trying to create user.')
-              console.log("Error occured");
+              alert('An error has occured trying to delete user.')
+              console.log("Error occured", err);
               return;
             });
           }else{
@@ -106,5 +107,10 @@ export class AdminComponent implements OnInit {
       alert("You do not have permission to delete users!")
       return;
     }
+  }
+
+  public createGroup(){
+    alert('Work in Progress, check back soon!');
+    return;
   }
 }

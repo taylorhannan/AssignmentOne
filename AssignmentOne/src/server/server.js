@@ -102,30 +102,45 @@ app.post('/api/reg', (req, res) => {
 
 //Route to delete user
 app.post('/api/del', (req, res) => {
-  var userExists = 0;
+  var delUname = req.body.username;
+  var isUser = 0;
   var delUserObj;
   //localhost:3000/api/reg?username=abcdefg
-  var delUname = req.body.username;
+  console.log(delUname)
 
   fs.readFile('userdata.json','utf-8', function(err, data){
-    if (err){
-        console.log(err);
-    }else{
+      if (err){
+          console.log(err);
+      } else {
       delUserObj = JSON.parse(data);
-      console.log("deluserobj", delUserObj);
-      var newdeldata = JSON.stringify(delUserObj);
-      for (let j=0;j<delUserObj.length;j++){
-        if (delUserObj[j].name == delUname){
-          //Check for match
-          delUserObj.splice(j,1);
+
+      for (let l=0;l<delUserObj.length;l++){
+        if (delUserObj[l].name == delUname){
+          //Check for duplicates
+          isUser = 1;
+          delete delUserObj[l].name;
+          delete delUserObj[l].email;
+          delete delUserObj[l].role;
+          break;
         }
       }
-      fs.writeFile('userdata.json',newdeldata,'utf-8',function(err){
-        if (err) throw err;
-        //Send response that deletion was successfull.
-        res.send({'success':true});
-      });
-    }
+
+      if (!isUser){
+        //Name already exists in the file
+        console.log(req.body);
+         res.send({'success':false});
+       }else{
+         //Add name to list of names
+         //delUserObj.splice(1,{"name":"deluser1","email":"deluser@foobar.com","role":"user"})
+         //Prepare data for writing (convert to a string)
+         var newdeldata = JSON.stringify(delUserObj);
+         fs.writeFile('userdata.json',newdeldata,'utf-8',function(err){
+           if (err) throw err;
+           //Send response that registration was successfull.
+           res.send({'username':delUname,'success':true});
+          });
+       }
+     }
   });
 });
 

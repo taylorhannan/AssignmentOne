@@ -22,12 +22,10 @@
     </div>
   </div>
 
-  <p id="demo"></p>
-
   <br>
+
   <div id="deleteUser">
     <h3>Delete User</h3>
-
     <form (submit)="deleteUser(deletedUser);">
         <select placeholder="Delete User" [(ngModel)]="deletedUser" name="deluser">
           <option *ngFor="let user of users" [value]="user.name">
@@ -36,6 +34,17 @@
         </select>
       <p> Selected User to Delete: {{deletedUser}}</p>
       <button type="submit">Delete</button>
+    </form>
+  </div>
+
+  <div id="createGroup">
+    <h3>Create New Group</h3>
+    <form (submit)="createGroup();">
+      <p>Group Name</p>
+      <input name="groupName" placeholder="Group Name.." [(ngModel)]='groupName'>
+      <br>
+      <br>
+      <button type="submit">Create</button>
     </form>
   </div>
 </div>
