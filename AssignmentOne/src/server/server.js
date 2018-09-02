@@ -133,7 +133,8 @@ app.post('/api/del', (req, res) => {
          //Add name to list of names
          //delUserObj.splice(1,{"name":"deluser1","email":"deluser@foobar.com","role":"user"})
          //Prepare data for writing (convert to a string)
-         var newdeldata = JSON.stringify(delUserObj);
+         var rawdeldata = delUserObj.filter(o => Object.keys(o).length);
+         var newdeldata = JSON.stringify(rawdeldata);
          fs.writeFile('userdata.json',newdeldata,'utf-8',function(err){
            if (err) throw err;
            //Send response that registration was successfull.
@@ -144,7 +145,6 @@ app.post('/api/del', (req, res) => {
   });
 });
 
-
 //Route to get user JSON
 app.post('/api/users', (req, res) => {
   fs.readFile('userdata.json','utf-8', function(err, data){
@@ -152,8 +152,99 @@ app.post('/api/users', (req, res) => {
         console.log(err);
     }else{
       var userData = JSON.parse(data);
-      var userDataString = JSON.stringify(userData);
       res.send({userData});
+    }
+  });
+});
+
+//Route to create new group
+app.post('/api/groupreg', (req, res) => {
+  var isGroup = 0;
+  var regGroupObj;
+  var regGname = req.body.groupname;
+  console.log(regGname);
+  fs.readFile('groupdata.json','utf-8', function(err, data){
+    if (err){
+        console.log(err);
+    }else{
+      regGroupObj = JSON.parse(data);
+
+      for (let f=0;f<regGroupObj.length;f++){
+        if (regGroupObj[f].name == regGname){
+          //Check for duplicates
+          isGroup = 1;
+        }
+      }
+      if (isGroup > 0){
+        //Name already exists in the file
+        console.log(req.body);
+         res.send({'name':'','success':false});
+       }else{
+         //Add name to list of names
+         regGroupObj.push({'name':regGname})
+         //Prepare data for writing (convert to a string)
+         var newGroupData = JSON.stringify(regGroupObj);
+         fs.writeFile('groupdata.json',newGroupData,'utf-8',function(err){
+           if (err) throw err;
+           //Send response that registration was successfull.
+           res.send({'groupname':regGname,'success':true});
+          });
+       }
+    }
+});
+});
+
+app.post('/api/delgroup', (req, res) => {
+  var delGname = req.body.groupname;
+  var isGroup = 0;
+  var delGroupObj;
+  //localhost:3000/api/reg?username=abcdefg
+  console.log('delGname', delGname)
+
+  fs.readFile('groupdata.json','utf-8', function(err, data){
+      if (err){
+          console.log(err);
+      } else {
+      delGroupObj = JSON.parse(data);
+
+      for (let z=0;z<delGroupObj.length;z++){
+        if (delGroupObj[z].name == delGname){
+          //Check for duplicates
+          isGroup = 1;
+          delete delGroupObj[z].name;
+          break;
+        }
+      }
+
+      if (!isGroup){
+        //Name already exists in the file
+          console.log('reqbody',req.body);
+          res.send({'success':false});
+       }else{
+         //Add name to list of names
+         //delUserObj.splice(1,{"name":"deluser1","email":"deluser@foobar.com","role":"user"})
+         //Prepare data for writing (convert to a string)
+         var rawGdeldata = delGroupObj.filter(a => Object.keys(a).length);
+         var newGdeldata = JSON.stringify(rawGdeldata);
+         fs.writeFile('groupdata.json',newGdeldata,'utf-8',function(err){
+           if (err) throw err;
+           //Send response that registration was successfull.
+           res.send({'groupname':delGname,'success':true});
+          });
+       }
+     }
+  });
+});
+
+
+//Route to get group JSON
+app.post('/api/groups', (req, res) => {
+  fs.readFile('groupdata.json','utf-8', function(err, data){
+    if (err){
+        console.log(err);
+    }else{
+      var groupData = JSON.parse(data);
+      res.send({groupData});
     }
   });
 });

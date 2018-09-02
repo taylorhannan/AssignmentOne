@@ -26,3 +26,15 @@
   padding: 10px;
   margin:10px;
 }
+
+#deleteGroup {
+  background-color: #5883ad;
+  display: inline-block;
+  padding: 10px;
+  margin:10px;
+}
+
+.delete{
+  font-weight: bold;
+  color: yellow;
+}

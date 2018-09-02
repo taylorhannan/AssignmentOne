@@ -15,11 +15,15 @@ export class AdminComponent implements OnInit {
   username:string = '';
   email:string = '';
   role:string = '';
-  deletedUser: string;
+
+  deletedUser:string;
   users = [{}];
 
-  ngOnInit(): void {
+  groupname:string = '';
+  deletedGroup:string;
+  groups = [{}];
 
+  ngOnInit(): void {
     if (!sessionStorage.username || !sessionStorage.email){
       alert("You are not logged in!")
       this.router.navigateByUrl('');
@@ -28,13 +32,28 @@ export class AdminComponent implements OnInit {
       this.router.navigateByUrl('/chat');
     }
 
+    // get user data
     const req = this.http.post('http://localhost:3000/api/users', {
       })
         .subscribe((data: any) => {
             if (data.userData) {
-              console.log('data', data.userData);
               this.users = data.userData;
-              console.log('thisusers',this.users);
+              //get group data
+              const req = this.http.post('http://localhost:3000/api/groups', {
+                })
+                  .subscribe((data: any) => {
+                      if (data.groupData) {
+                        this.groups = data.groupData;
+                      } else {
+                        alert('Error!');
+                        return;
+                      }
+                    },
+                    err => {
+                      alert('An error has occured trying to create user.')
+                      console.log("Error occured");
+                      return;
+                    });
             } else {
               alert('Error!');
               return;
@@ -62,6 +81,26 @@ export class AdminComponent implements OnInit {
             .subscribe((data: any) => {
                 if (data.success) {
                   alert('User created successfully!');
+                  this.username = '';
+                  this.email = '';
+                  this.role = '';
+                  const req = this.http.post('http://localhost:3000/api/users', {
+                    })
+                      .subscribe((data: any) => {
+                          if (data.userData) {
+                            console.log('data', data.userData);
+                            this.users = data.userData;
+                            console.log('thisusers',this.users);
+                          } else {
+                            alert('Error!');
+                            return;
+                          }
+                        },
+                        err => {
+                          alert('An error has occured trying to create user.')
+                          console.log("Error occured");
+                          return;
+                        });
                 } else {
                   alert('Error!');
                   return;
@@ -90,6 +129,24 @@ export class AdminComponent implements OnInit {
             console.log(data.success);
               if (data.success) {
                 alert('User deleted successfully!');
+                this.deletedUser = '';
+                const req = this.http.post('http://localhost:3000/api/users', {
+                  })
+                    .subscribe((data: any) => {
+                        if (data.userData) {
+                          console.log('data', data.userData);
+                          this.users = data.userData;
+                          console.log('thisusers',this.users);
+                        } else {
+                          alert('Error!');
+                          return;
+                        }
+                      },
+                      err => {
+                        alert('An error has occured trying to create user.')
+                        console.log("Error occured");
+                        return;
+                      });
               } else {
                 alert('This user does not exist!');
                 return;
@@ -109,8 +166,99 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  public createGroup(){
-    alert('Work in Progress, check back soon!');
-    return;
+  public createGroup() {
+    // Function used to create group & post to backend API
+    event.preventDefault();
+      if(!this.groupname){
+        alert("Group name field must not be blank!");
+      }else{
+        const req = this.http.post('http://localhost:3000/api/groupreg', {
+            groupname: this.groupname
+          })
+            .subscribe((data: any) => {
+                if (data.success) {
+                  console.log(data);
+                  alert('Group created successfully!');
+                  this.groupname = '';
+                  const req = this.http.post('http://localhost:3000/api/groups', {
+                    })
+                      .subscribe((data: any) => {
+                          if (data.groupData) {
+                            console.log('groupdata', data.groupData);
+                            this.groups = data.groupData;
+                            console.log('thisgroups',this.groups);
+                          } else {
+                            alert('Error!');
+                            return;
+                          }
+                        },
+                        err => {
+                          alert('An error has occured trying to create user.')
+                          console.log("Error occured");
+                          return;
+                        });
+                } else {
+                  alert('Group already exists!');
+                  return;
+                }
+              },
+              err => {
+                alert('An error has occured trying to create user.')
+                console.log("Error occured");
+                return;
+              });
+    }
+  }
+
+
+  public deleteGroup(deletedGroup) {
+   // Deletes a user from the database
+    if (sessionStorage.role != "user" ){
+      if(deletedGroup){
+        event.preventDefault();
+        console.log(deletedGroup);
+        const req = this.http.post('http://localhost:3000/api/delgroup', {
+            groupname: this.deletedGroup
+          })
+          .subscribe((data: any) => {
+            console.log(data);
+            console.log(data.success);
+              if (data.success) {
+                alert('Group deleted successfully!');
+                this.deletedGroup = '';
+                const req = this.http.post('http://localhost:3000/api/groups', {
+                  })
+                    .subscribe((data: any) => {
+                        if (data.groupData) {
+                          console.log('data', data.groupData);
+                          this.groups = data.groupData;
+                          console.log('thisgroups',this.groups);
+                        } else {
+                          alert('Error!');
+                          return;
+                        }
+                      },
+                      err => {
+                        alert('An error has occured trying to delete group.')
+                        console.log("Error occured");
+                        return;
+                      });
+              } else {
+                alert('This group does not exist!');
+                return;
+              }
+            },
+            err => {
+              alert('An error has occured trying to delete group.')
+              console.log("Error occured", err);
+              return;
+            });
+          }else{
+            alert("You did not select a group to delete!");
+          }
+    }else{
+      alert("You do not have permission to delete groups!")
+      return;
+    }
   }
 }

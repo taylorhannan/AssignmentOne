@@ -3,7 +3,7 @@
   <div id="createUser">
   <h3>Create User</h3>
     <div id="createuserform">
-      <form (submit)="createUser();">
+      <form (submit)="createUser();" id="createUser">
         <p>Username</p>
         <input name="username" placeholder="Username.." [(ngModel)]='username'>
         <br>
@@ -32,7 +32,7 @@
             {{user.name}}
           </option>
         </select>
-      <p> Selected User to Delete: {{deletedUser}}</p>
+      <p> Selected User to Delete:</p> <p class="delete">{{deletedUser}}</p>
       <button type="submit">Delete</button>
     </form>
   </div>
@@ -41,10 +41,23 @@
     <h3>Create New Group</h3>
     <form (submit)="createGroup();">
       <p>Group Name</p>
-      <input name="groupName" placeholder="Group Name.." [(ngModel)]='groupName'>
+      <input name="groupname" placeholder="Group Name.." [(ngModel)]='groupname'>
       <br>
       <br>
       <button type="submit">Create</button>
+    </form>
+  </div>
+
+  <div id="deleteGroup">
+    <h3>Delete Group</h3>
+    <form (submit)="deleteGroup(deletedGroup);">
+        <select placeholder="Delete Group" [(ngModel)]="deletedGroup" name="delgroup">
+          <option *ngFor="let group of groups" [value]="group.name">
+            {{group.name}}
+          </option>
+        </select>
+      <p> Selected Group to Delete:</p> <p class="delete">{{deletedGroup}}</p>
+      <button type="submit">Delete</button>
     </form>
   </div>
 </div>

@@ -4,15 +4,16 @@
     <ng-container *ngFor="let message of messages">
       <div id="message">
         {{message.text}}
-
       </div>
     </ng-container>
   </div>
 
   <div>
-    <input [(ngModel)]="message" placeholder="Type message here.." type="text" #newMessage>
-    <div>
-      <button type="button" (click)="sendMessage()">Send</button>
-    </div>
+    <form (submit)="sendMessage()">
+      <input name="message" [(ngModel)]="message" placeholder="Type message here.." type="text" #newMessage>
+      <div>
+        <button type="button">Send</button>
+      </div>
+    </form>
   </div>
 </div>
