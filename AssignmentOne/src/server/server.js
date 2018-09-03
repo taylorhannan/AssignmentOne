@@ -194,7 +194,7 @@ app.post('/api/groupreg', (req, res) => {
 });
 });
 
-app.post('/api/delgroup', (req, res) => {
+app.post('/api/groupdel', (req, res) => {
   var delGname = req.body.groupname;
   var isGroup = 0;
   var delGroupObj;

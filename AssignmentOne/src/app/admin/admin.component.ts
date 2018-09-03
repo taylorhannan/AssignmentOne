@@ -217,7 +217,7 @@ export class AdminComponent implements OnInit {
       if(deletedGroup){
         event.preventDefault();
         console.log(deletedGroup);
-        const req = this.http.post('http://localhost:3000/api/delgroup', {
+        const req = this.http.post('http://localhost:3000/api/groupdel', {
             groupname: this.deletedGroup
           })
           .subscribe((data: any) => {
