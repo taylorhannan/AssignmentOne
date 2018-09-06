@@ -1,63 +1,104 @@
 <div id="admin">
   <h2>Admin Dashboard</h2>
-  <div id="createUser">
-  <h3>Create User</h3>
-    <div id="createuserform">
-      <form (submit)="createUser();" id="createUser">
-        <p>Username</p>
-        <input name="username" placeholder="Username.." [(ngModel)]='username'>
-        <br>
-        <p>Email</p>
-        <input name="email" placeholder="Email.." [(ngModel)]='email'>
-        <br>
-        <p>Role</p>
-        <select [(ngModel)]="role" name="role">
-          <option value="user">User</option>
-          <option value="groupAdmin">Group Admin</option>
-          <option value="superAdmin">Super Admin</option>
-        </select>
-        <br><br>
-        <button type="submit">Create</button>
+  <h3>User Options</h3>
+  <div id ="user">
+    <div id="createUser">
+    <h3>Create User</h3>
+      <div class="userform">
+        <form (submit)="createUser();" id="createUser">
+          <p>Username</p>
+          <input name="username" placeholder="Username.." [(ngModel)]='username'>
+          <br>
+          <p>Email</p>
+          <input name="email" placeholder="Email.." [(ngModel)]='email'>
+          <br>
+          <p>Role</p>
+          <select [(ngModel)]="role" name="role">
+            <option value="user">User</option>
+            <option value="groupAdmin">Group Admin</option>
+            <option value="superAdmin">Super Admin</option>
+          </select>
+          <br><br>
+          <button type="submit">Create</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="cellSpace">
+      <p class="dummySpace">.....</p>
+    </div>
+
+    <div id="addGroupUser">
+    <h3>Add User to Group</h3>
+      <div class="userform">
+        <form (submit)="addGroupUser();" id="addUser">
+          <p>Group</p>
+          <select placeholder="Add Group" [(ngModel)]='addGgroupname' name="addgroup">
+            <option *ngFor="let group of groups" [value]="group.name">
+              {{group.name}}
+            </option>
+          </select>
+          <br>
+          <p>User</p>
+          <select placeholder="Add User" [(ngModel)]='addGusername' name="adduser">
+            <option *ngFor="let user of users" [value]="user.name">
+              {{user.name}}
+            </option>
+          </select>
+          <br><br>
+          <button type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="cellSpace">
+      <p class="dummySpace">.....</p>
+    </div>
+
+    <div id="deleteUser">
+      <h3>Delete User</h3>
+      <form (submit)="deleteUser(deletedUser);">
+          <select placeholder="Delete User" [(ngModel)]="deletedUser" name="deluser">
+            <option *ngFor="let user of users" [value]="user.name">
+              {{user.name}}
+            </option>
+          </select>
+        <p> Selected User to Delete:</p> <p class="highlight">{{deletedUser}}</p>
+        <button type="submit">Delete</button>
       </form>
     </div>
   </div>
 
   <br>
 
-  <div id="deleteUser">
-    <h3>Delete User</h3>
-    <form (submit)="deleteUser(deletedUser);">
-        <select placeholder="Delete User" [(ngModel)]="deletedUser" name="deluser">
-          <option *ngFor="let user of users" [value]="user.name">
-            {{user.name}}
-          </option>
-        </select>
-      <p> Selected User to Delete:</p> <p class="delete">{{deletedUser}}</p>
-      <button type="submit">Delete</button>
-    </form>
-  </div>
+  <h3>Group Options</h3>
+  <div id ="group">
+    <div id="createGroup">
+      <h3>Create New Group</h3>
+      <form (submit)="createGroup();">
+        <p>Group Name</p>
+        <input name="groupname" placeholder="Group Name.." [(ngModel)]='groupname'>
+        <br>
+        <br>
+        <button type="submit">Create</button>
+      </form>
+    </div>
 
-  <div id="createGroup">
-    <h3>Create New Group</h3>
-    <form (submit)="createGroup();">
-      <p>Group Name</p>
-      <input name="groupname" placeholder="Group Name.." [(ngModel)]='groupname'>
-      <br>
-      <br>
-      <button type="submit">Create</button>
-    </form>
-  </div>
+    <div class="cellSpace">
+      <p class="dummySpace">.....</p>
+    </div>
 
-  <div id="deleteGroup">
-    <h3>Delete Group</h3>
-    <form (submit)="deleteGroup(deletedGroup);">
-        <select placeholder="Delete Group" [(ngModel)]="deletedGroup" name="delgroup">
-          <option *ngFor="let group of groups" [value]="group.name">
-            {{group.name}}
-          </option>
-        </select>
-      <p> Selected Group to Delete:</p> <p class="delete">{{deletedGroup}}</p>
-      <button type="submit">Delete</button>
-    </form>
+    <div id="deleteGroup">
+      <h3>Delete Group</h3>
+      <form (submit)="deleteGroup(deletedGroup);">
+          <select placeholder="Delete Group" [(ngModel)]="deletedGroup" name="delgroup">
+            <option *ngFor="let group of groups" [value]="group.name">
+              {{group.name}}
+            </option>
+          </select>
+        <p> Selected Group to Delete:</p> <p class="highlight">{{deletedGroup}}</p>
+        <button type="submit">Delete</button>
+      </form>
+    </div>
   </div>
 </div>
